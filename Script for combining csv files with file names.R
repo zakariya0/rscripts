@@ -1,0 +1,6 @@
+library(data.table)
+filenames <- list.files(full.names=TRUE)
+filenames <- setNames(filenames , filenames)
+All <- lapply(filenames,function(i){read.csv(i, header=FALSE, skip=1)})
+df <- rbindlist(All, fill=TRUE, idcol=filenames)
+write.csv(df,"all_hormones.csv", row.names=FALSE)
